@@ -1,0 +1,96 @@
+📄 My Workflow 3
+This repository contains an n8n workflow that provides an empathetic AI assistant for emotional and mental support. The workflow receives user input via webhook, processes it through an AI language model, and returns a compassionate response.
+
+✨ Features
+✅ Receives user messages through a secure webhook
+✅ Uses Google Gemini (PaLM) to generate supportive, uplifting replies
+✅ Responds with positive, empathetic guidance
+✅ Provides encouragement and gentle suggestions
+✅ Includes safety reminders to seek professional help if needed
+
+🛠️ Workflow Overview
+The workflow is built with these main components:
+
+Webhook
+
+Receives incoming POST requests with the user’s message.
+
+AI Agent
+
+Processes the text input and prepares instructions for the language model.
+
+Contains a detailed system prompt to ensure warm, empathetic responses.
+
+Google Gemini Chat Model
+
+Generates natural, emotionally supportive replies.
+
+Respond to Webhook
+
+Sends the AI-generated response back to the user.
+
+🔗 Node Connections
+From	To	Purpose
+Webhook	AI Agent	Receives the input and forwards to AI Agent
+Google Gemini Chat	AI Agent	Provides natural language understanding
+AI Agent	Respond to Webhook	Returns the crafted response
+
+⚙️ How It Works
+User sends a POST request to the webhook URL containing their message.
+
+AI Agent processes the text with a prompt to:
+
+Listen empathetically
+
+Validate feelings
+
+Offer hope and encouragement
+
+Remind the user they are not alone
+
+Suggest professional help if needed
+
+Google Gemini generates a thoughtful response.
+
+The workflow returns the response to the user.
+
+📝 System Prompt (Instruction to AI)
+This is the guidance given to the AI:
+
+pgsql
+Copy
+Edit
+You are a warm, empathetic assistant whose goal is to help the user feel hopeful and uplifted. When the user shares problems or sadness, acknowledge their feelings gently. Use positive, encouraging language to help them see new perspectives and focus on things that bring them joy or comfort. Offer supportive suggestions to shift their mindset toward optimism. Remind them that it’s okay to feel what they feel, but also guide them to notice what is good or meaningful in their life. Be kind, non-judgmental, and respectful.
+🚀 How to Use
+Import My workflow 3.json into your n8n instance.
+
+Set up credentials:
+
+Google Gemini (PaLM) API account
+
+Activate the workflow.
+
+Send a POST request to the webhook URL:
+
+perl
+Copy
+Edit
+https://<your-n8n-instance>/webhook/f1a291cb-ba56-47c1-b1ac-ce82f71a3210
+Body Example:
+
+json
+Copy
+Edit
+{
+  "body": "I feel overwhelmed and anxious lately."
+}
+Receive a warm, supportive response.
+
+📂 File Structure
+nginx
+Copy
+Edit
+My workflow 3.json    # Workflow definition
+README.md             # Documentation
+🛡️ Disclaimer
+This workflow provides general emotional support but does not replace professional mental health care. If users are in crisis, encourage them to call local emergency services or contact a qualified professional.
