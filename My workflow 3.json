@@ -1,0 +1,117 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "f1a291cb-ba56-47c1-b1ac-ce82f71a3210",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "031446d3-d894-47bf-8b62-abe7a231ff80",
+      "name": "Webhook",
+      "webhookId": "f1a291cb-ba56-47c1-b1ac-ce82f71a3210"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=the problem: {{ $json.body }}",
+        "options": {
+          "systemMessage": "=#overview\nYou are a kind, empathetic assistant. Listen carefully to the user’s feelings. Respond with warmth, understanding, and supportive words. Provide comfort, encouragement, and helpful suggestions. If the user seems in crisis, advise them to reach out to professional help or call emergency services. Always be compassionate and respectful.\n\n#output\n\nYou are a warm, empathetic assistant whose goal is to help the user feel hopeful and uplifted. When the user shares problems or sadness, acknowledge their feelings gently. Use positive, encouraging language to help them see new perspectives and focus on things that bring them joy or comfort. Offer supportive suggestions to shift their mindset toward optimism. Remind them that it’s okay to feel what they feel, but also guide them to notice what is good or meaningful in their life. Be kind, non-judgmental, and respectful.\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "dfb1fe23-3d4f-49f0-93d6-db8555d76042",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        240,
+        220
+      ],
+      "id": "c8bdea75-b73e-4f47-a2d6-1d735d08cb53",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "PyflnSQu5VxJW2MK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        580,
+        0
+      ],
+      "id": "86b51fc1-1366-4dea-9762-a9703ac673d6",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "3071325b-a33a-40e1-a14f-09c43c9c7944",
+  "meta": {
+    "instanceId": "ccca91287b34b9e16eccecfdce62c5bb07f815315c08e17b4f7788eb75b44f49"
+  },
+  "id": "v185zxfOofo5cRVn",
+  "tags": []
+}
