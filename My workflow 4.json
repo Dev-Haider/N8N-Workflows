@@ -1,0 +1,118 @@
+{
+  "name": "My workflow 4",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e059c2d6-8847-434a-ac9d-15a8240fc978",
+      "name": "When chat message received",
+      "webhookId": "718f984e-7f7c-46d9-9b6f-585b29026e6e"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "1174e25d-ab45-4197-a44b-234521f59a80",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        180,
+        200
+      ],
+      "id": "ed408e60-1326-4958-a61c-9698661fcc48",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "PyflnSQu5VxJW2MK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Text', ``, 'string') }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.twitterTool",
+      "typeVersion": 2,
+      "position": [
+        420,
+        220
+      ],
+      "id": "fbca5142-1e07-4805-bb41-f87262b8f260",
+      "name": "Create Tweet in X",
+      "credentials": {
+        "twitterOAuth2Api": {
+          "id": "iGwXTVW55o8704L5",
+          "name": "X account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Tweet in X": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "6ed0a200-2d79-47c7-90ac-a35f278f6050",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ccca91287b34b9e16eccecfdce62c5bb07f815315c08e17b4f7788eb75b44f49"
+  },
+  "id": "RQAJUpkIShQSZ8aM",
+  "tags": []
+}
