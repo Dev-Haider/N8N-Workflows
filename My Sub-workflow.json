@@ -1,0 +1,122 @@
+{
+  "name": "My Sub-workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -60,
+        0
+      ],
+      "id": "23c51a35-f9ae-4139-a7c8-75ade72d0b55",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        180
+      ],
+      "id": "b1314caa-d67a-4e35-9f3f-50ec9d5862df",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "PyflnSQu5VxJW2MK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -320,
+        0
+      ],
+      "id": "722819b2-e793-42f6-94a3-4dd555ccd721",
+      "name": "When chat message received",
+      "webhookId": "2aedd0ad-6b6d-4bfd-858c-be439fae8cc7"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        200,
+        200
+      ],
+      "id": "d82800e0-267c-49b0-b25a-d7c5a635c44d",
+      "name": "send gmail",
+      "webhookId": "3add20ec-ef34-4371-b376-087a89034b39",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "KQuKcPyaTC2nsqz7",
+          "name": "Gmail account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "send gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4b6a62e4-f56d-4f6f-b057-41b0dcf88415",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ccca91287b34b9e16eccecfdce62c5bb07f815315c08e17b4f7788eb75b44f49"
+  },
+  "id": "5RUBWHelhPiET7Tz",
+  "tags": []
+}
